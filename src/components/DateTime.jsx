@@ -24,7 +24,7 @@ export default function DateTime() {
           <Button
             key={index}
             className={`w-2/5 ${time == selectedtime ? "bg-slate-200" : ""}`}
-            variant={time == selectedtime ? "outline" : "ghost"}
+            variant="outline"
             onClick={() => setSelectedTime(time)}
           >
             {time}

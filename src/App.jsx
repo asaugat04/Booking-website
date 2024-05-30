@@ -6,8 +6,11 @@ import Location from "./components/Location";
 import DateTime from "./components/DateTime";
 import Payment from "./components/Payment";
 import ReviewConfirm from "./components/ReviewConfirm";
+import UserContext from "./UserContext";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState({ loggedin: false, name: "", email: "" });
   const steps = [
     { content: "Service Details", body: <ServiceDetails /> },
     { content: "DateTime", body: <DateTime /> },
@@ -16,13 +19,13 @@ function App() {
     { content: "Review Confirm", body: <ReviewConfirm /> },
   ];
   return (
-    <>
+    <UserContext.Provider value={{ user, setUser }}>
       <Navbar />
 
       <div className="p-2 ">
         <Stepper steps={steps} />
       </div>
-    </>
+    </UserContext.Provider>
   );
 }
 
