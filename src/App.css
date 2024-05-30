@@ -1,0 +1,32 @@
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    width: auto;
+    right: 36px;
+    z-index: 0;
+    border-bottom: 3px dashed #9a9191;
+    margin-top: auto;
+  }
+}
+.stepperCircle {
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #9a9191;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  &.active {
+    width: 10px;
+    height: 10px;
+    box-shadow: 0 0 0 10px #007c92;
+  }
+}
