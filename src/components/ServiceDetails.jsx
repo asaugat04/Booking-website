@@ -8,7 +8,7 @@ export default function ServiceDetails() {
   const [specialInstruction, setSpecialInstruction] = useState("");
 
   return (
-    <div className="flex flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl">
+    <div className="flex flex-col m-4 md:w-3/5 md:border md:p-8 md:rounded-lg md:shadow-xl">
       <h1 className="text-lg mb-1">Home Cleaning</h1>
       <p className="text-sm">
         Fill out the booking form, and we'll pair you with the perfect cleaner
@@ -30,8 +30,8 @@ export default function ServiceDetails() {
       </div>
       <h2 className="mt-2 mb-1 text-lg">How many hours should they stay?</h2>
       <div className="flex flex-row">
-        {[1, 2, 3, 4, 5, 6].map((number) => (
-          <p key={number} className="flex flex-col">
+        {[1, 2, 3].map((number) => (
+          <p key={number} className="stepperDots flex flex-col">
             <button
               onClick={() => setActiveHoursButton(number)}
               className={`block border-2 rounded-full hoursbtn py-2 px-7 mx-2 ${

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import FooterBtns from "./FooterBtns";
 
 const Stepper = ({ steps }) => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const goToNextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -10,11 +10,12 @@ const Stepper = ({ steps }) => {
     }
   };
 
-  const goToPreviousStep = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+  const goToNthPreviousStep = (n) => {
+    if (currentStep > n) {
+      setCurrentStep(n);
     }
   };
+
   return (
     <>
       <div className="stepperTabs flex flex-col items-center">
@@ -24,14 +25,20 @@ const Stepper = ({ steps }) => {
         <ul className="stepper m-0 w-full pl-6 p-3 border-y-2 mt-14 fixed bg-white md:relative md:mt-2 md:border-0 md:w-4/5 ">
           {steps.map((step, index) => (
             <li
+              onClick={() => goToNthPreviousStep(index)}
               key={index}
               className="inline mr-3 flex flex-col justify-center "
             >
               <p
                 className={
-                  "stepperCircle " + (index == currentStep ? " active" : "")
+                  "stepperCircle bg-slate-300 text-xs" +
+                  (index <= currentStep
+                    ? " active border-4 border-slate-500"
+                    : "")
                 }
-              ></p>
+              >
+                {index < currentStep ? <i class="fa-solid fa-check"></i> : ""}
+              </p>
             </li>
           ))}
         </ul>
@@ -43,7 +50,7 @@ const Stepper = ({ steps }) => {
         {steps[currentStep].body}
         <div className="detailsBlock hidden md:block">helkjlsajdlkfj</div>
       </div>
-      <FooterBtns prev={goToPreviousStep} next={goToNextStep} />
+      <FooterBtns next={goToNextStep} />
     </>
   );
 };
