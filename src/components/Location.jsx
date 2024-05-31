@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "./ui/button";
+import UserContext from "@/UserContext";
 import DatePicker from "./ui/DatePicker";
 import {
   DropdownMenu,
@@ -13,6 +14,11 @@ import {
 export default function Location() {
   const [location, setLocation] = useState(null);
   const [date, setDate] = useState(new Date());
+
+  const { user, setUser } = useContext(UserContext);
+  //there is no location for setting location due to unavailability of google maps api.
+  // ********************setUser({ ...user, location: location });****************************
+  //the above line can be used to set the location in the user object.
 
   return (
     <div className="flex w-full min-h-96 md:w-3/5 flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl">

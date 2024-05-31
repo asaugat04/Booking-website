@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import UserContext from "@/UserContext";
+import { Button } from "./ui/button";
 
 export default function ServiceDetails() {
+  const { user, setUser } = React.useContext(UserContext);
   const [activeCleanerButton, setActiveCleanerButton] = useState(1);
   const [activeHoursButton, setActiveHoursButton] = useState(1);
   const [activeFrequencyButton, setActiveFrequencyButton] = useState("");
@@ -17,29 +20,45 @@ export default function ServiceDetails() {
       <h2 className="mt-2 text-lg">How many cleaners do you need?</h2>
       <div>
         {[1, 2, 3, 4].map((number) => (
-          <button
+          <Button
             key={number}
-            className={`cleanerbtn border-2 rounded-full py-2 px-7 mx-2 ${
-              activeCleanerButton === number ? "bg-blue-500 text-white" : ""
+            variant="outline"
+            className={`hover:bg-initial hover:text-initial cleanerbtn border-2 rounded-lg py-2 px-7 mx-2 ${
+              activeCleanerButton === number
+                ? "bg-indigo-500 text-white shadow-sm"
+                : ""
             }`}
-            onClick={() => setActiveCleanerButton(number)}
+            onClick={() => {
+              setActiveCleanerButton(number);
+              setUser({
+                ...user,
+                noOfCleaners: number,
+              });
+            }}
           >
             {number}
-          </button>
+          </Button>
         ))}
       </div>
       <h2 className="mt-2 mb-1 text-lg">How many hours should they stay?</h2>
       <div className="flex flex-row">
         {[1, 2, 3].map((number) => (
           <p key={number} className="stepperDots flex flex-col">
-            <button
-              onClick={() => setActiveHoursButton(number)}
-              className={`block border-2 rounded-full hoursbtn py-2 px-7 mx-2 ${
-                activeHoursButton === number ? "bg-blue-500 text-white" : ""
+            <Button
+              onClick={() => {
+                setActiveHoursButton(number);
+                setUser({
+                  ...user,
+                  cleaningHours: number,
+                });
+              }}
+              variant="outline"
+              className={`hover:bg-initial hover:text-initial block border-2 rounded-lg hoursbtn py-2 px-7 mx-2 ${
+                number === activeHoursButton ? "bg-indigo-500 text-white" : ""
               }`}
             >
               {number}
-            </button>
+            </Button>
             <span className="text-xs text-center"> AED {40 - number}/hr </span>
           </p>
         ))}
@@ -50,9 +69,15 @@ export default function ServiceDetails() {
         {["Once", "Weekly", "Multiple times a week"].map((frequency) => (
           <button
             key={frequency}
-            onClick={() => setActiveFrequencyButton(frequency)}
-            className={`border text-sm rounded-lg py-2 px-7 mx-2 my-3 ${
-              activeFrequencyButton === frequency ? "border-blue-500" : ""
+            onClick={() => {
+              setActiveFrequencyButton(frequency);
+              setUser({
+                ...user,
+                cleaningFrequency: frequency,
+              });
+            }}
+            className={`hover:bg-initial hover:text-initial  border text-sm rounded-lg py-2 px-7 mx-2 my-3 ${
+              activeFrequencyButton === frequency ? "border-indigo-500" : ""
             }`}
           >
             <ul className="list-disc text-left list-inside">
@@ -84,9 +109,18 @@ export default function ServiceDetails() {
           {["Yes", "No"].map((option) => (
             <button
               key={option}
-              onClick={() => setActiveMaterialButton(option)}
-              className={`block border-2 rounded-full hoursbtn py-2 px-7 mx-2 my-2 ${
-                activeMaterialButton === option ? "bg-blue-500 text-white" : ""
+              variant={activeMaterialButton === option ? "" : "outline"}
+              onClick={() => {
+                setActiveMaterialButton(option);
+                setUser({
+                  ...user,
+                  needMaterials: option === "Yes",
+                });
+              }}
+              className={`hover:bg-initial hover:text-initial block border-2 rounded-lg hoursbtn py-2 px-7 mx-2 my-2 ${
+                activeMaterialButton === option
+                  ? "bg-indigo-500 text-white"
+                  : ""
               }`}
             >
               {option}
@@ -100,7 +134,13 @@ export default function ServiceDetails() {
         style={{ resize: "none" }}
         className="border-2 rounded-lg p-2 w-full"
         value={specialInstruction}
-        onChange={(e) => setSpecialInstruction(e.target.value)}
+        onChange={(e) => {
+          setSpecialInstruction(e.target.value);
+          setUser({
+            ...user,
+            instruction: e.target.value,
+          });
+        }}
         placeholder="Example: Please clean the windows and the balcony."
       ></textarea>
     </div>

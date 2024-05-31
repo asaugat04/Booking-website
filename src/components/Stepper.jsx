@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FooterBtns from "./FooterBtns";
+import ServiceDesc from "./ServiceDesc";
 
 const Stepper = ({ steps }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -52,7 +53,9 @@ const Stepper = ({ steps }) => {
       {/* end of div */}
       <div className="flex flex-row justify-around">
         {steps[currentStep].body}
-        <div className="detailsBlock hidden md:block">helkjlsajdlkfj</div>
+        <div className="detailsBlock hidden md:block ">
+          <ServiceDesc />
+        </div>
       </div>
       <FooterBtns next={goToNextStep} />
     </>
