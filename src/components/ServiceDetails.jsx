@@ -4,14 +4,14 @@ import { Button } from "./ui/button";
 
 export default function ServiceDetails() {
   const { user, setUser } = React.useContext(UserContext);
-  const [activeCleanerButton, setActiveCleanerButton] = useState(1);
-  const [activeHoursButton, setActiveHoursButton] = useState(1);
+  const [activeCleanerButton, setActiveCleanerButton] = useState(0);
+  const [activeHoursButton, setActiveHoursButton] = useState(0);
   const [activeFrequencyButton, setActiveFrequencyButton] = useState("");
   const [activeMaterialButton, setActiveMaterialButton] = useState("");
   const [specialInstruction, setSpecialInstruction] = useState("");
 
   return (
-    <div className="flex flex-col m-4 md:w-3/5 md:border md:p-8 md:rounded-lg md:shadow-xl">
+    <>
       <h1 className="text-lg mb-1">Home Cleaning</h1>
       <p className="text-sm">
         Fill out the booking form, and we'll pair you with the perfect cleaner
@@ -143,6 +143,6 @@ export default function ServiceDetails() {
         }}
         placeholder="Example: Please clean the windows and the balcony."
       ></textarea>
-    </div>
+    </>
   );
 }

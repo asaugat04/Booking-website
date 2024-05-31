@@ -10,7 +10,7 @@ export default function DateTime() {
   const { user, setUser } = useContext(UserContext);
 
   return (
-    <div className="flex w-full min-h-96 md:w-3/5 flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl">
+    <>
       <h1 className="text-lg mb-1 text-left w-full">
         Pict a date comfortable for you
       </h1>
@@ -45,6 +45,6 @@ export default function DateTime() {
           </Button>
         ))}
       </div>
-    </div>
+    </>
   );
 }

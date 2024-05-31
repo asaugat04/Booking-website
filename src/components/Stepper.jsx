@@ -51,8 +51,10 @@ const Stepper = ({ steps }) => {
       {/* this div is placed in the back side of fixed bars so we don't need to give margin to each component  */}
       <div className="w-full h-32 md:h-4"></div>
       {/* end of div */}
-      <div className="flex flex-row justify-around">
-        {steps[currentStep].body}
+      <div className="flex flex-row justify-center ">
+        <div className="flex w-full min-h-96 md:w-3/5 flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl md:max-w-[45vw]">
+          {steps[currentStep].body}
+        </div>
         <div className="detailsBlock hidden md:block ">
           <ServiceDesc />
         </div>

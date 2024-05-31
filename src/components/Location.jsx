@@ -21,7 +21,7 @@ export default function Location() {
   //the above line can be used to set the location in the user object.
 
   return (
-    <div className="flex w-full min-h-96 md:w-3/5 flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl">
+    <>
       <h1 className="text-lg mb-1 text-left w-full">
         Where do you need the service?
       </h1>
@@ -60,6 +60,6 @@ export default function Location() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </div>
+    </>
   );
 }

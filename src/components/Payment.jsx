@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CardImage from "../assets/card.png";
@@ -6,19 +6,16 @@ import UserContext from "@/UserContext";
 import { Input } from "@/components/ui/input";
 
 export default function Payment() {
-  const [paymentType, setPaymentType] = useState("card");
+  const [paymentMethod, setPaymentType] = useState("");
   const [cardNumber, setCardNumber] = useState(null);
   const [name, setName] = useState("");
   const [expiryDate, setExpiryDate] = useState("12/11");
   const [cvv, setCvv] = useState(null);
+
   const { user, setUser } = useContext(UserContext);
 
-  useEffect(() => {
-    setUser({ ...user, paymentType: paymentType });
-    console.log(user.paymentType);
-  }, [paymentType]);
   return (
-    <div className="flex w-full min-h-96 md:w-3/5 flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl">
+    <>
       <h1 className="text-lg mb-1 text-left w-full">
         Where do you need the service?
       </h1>
@@ -28,11 +25,10 @@ export default function Payment() {
       <div className="payment-type">
         <div className="card w-full">
           <RadioGroup
-            value={paymentType}
-            defaultValue="cod"
+            value={paymentMethod}
             onValueChange={(e) => {
               setPaymentType(e);
-              // setUser({ ...user, paymentType: e });
+              setUser({ ...user, paymentMethod: e });
             }}
           >
             <Label htmlFor="card">
@@ -43,7 +39,7 @@ export default function Payment() {
                 </div>
                 <div
                   className={`${
-                    paymentType == "card" ? "" : "hidden"
+                    paymentMethod == "card" ? "" : "hidden"
                   } hiding-card-div text-xs pl-6 flex flex-col items-center w-full gap-x-2 md:flex-row`}
                 >
                   <div className="card-left flex flex-row">
@@ -136,6 +132,6 @@ export default function Payment() {
           </RadioGroup>
         </div>
       </div>
-    </div>
+    </>
   );
 }
