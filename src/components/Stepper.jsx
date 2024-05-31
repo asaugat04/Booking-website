@@ -37,7 +37,11 @@ const Stepper = ({ steps }) => {
                     : "")
                 }
               >
-                {index < currentStep ? <i class="fa-solid fa-check"></i> : ""}
+                {index < currentStep ? (
+                  <i className="fa-solid fa-check"></i>
+                ) : (
+                  ""
+                )}
               </p>
             </li>
           ))}
