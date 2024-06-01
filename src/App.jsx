@@ -10,7 +10,7 @@ import UserContext from "./UserContext";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState({ loggedin: false, name: "", email: "" });
+  const [user, setUser] = useState({});
   const steps = [
     { content: "Service Details", body: <ServiceDetails /> },
     { content: "DateTime", body: <DateTime /> },
