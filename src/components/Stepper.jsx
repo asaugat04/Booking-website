@@ -3,7 +3,7 @@ import FooterBtns from "./FooterBtns";
 import ServiceDesc from "./ServiceDesc";
 
 const Stepper = ({ steps }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const goToNextStep = () => {
     if (currentStep < steps.length - 1) {
