@@ -1,40 +1,45 @@
 import { useContext, useEffect, useState } from "react";
 import UserContext from "@/UserContext";
 
-export default function ALLInfoSideBox() {
+let calculatePrice = (user) => {
+  let ratePercleaner = 10;
+  let ratePerHour = 10;
+  let price = 0;
+  if (user?.noOfCleaners) {
+    price += user.noOfCleaners * 10;
+  }
+  if (user?.cleaningHours) {
+    price += user.cleaningHours * 10;
+  }
+  if (user?.cleaningFrequency) {
+    price += user.cleaningFrequency === "weekly" ? 10 : 20;
+  }
+  if (user?.needMaterials) {
+    price += 10;
+  }
+  return {
+    serviceCharges: price,
+    vat: price * 0.1,
+    total: price + price * 0.1,
+  };
+};
+
+export default function ALLInfoSideBox({ className = "" }) {
+  const { user } = useContext(UserContext);
   let [calculatedPrice, setCalculatedPrice] = useState({});
 
   useEffect(() => {
     setCalculatedPrice(calculatePrice(user));
-  });
+    console.log(className);
+  }, [user]);
 
-  let calculatePrice = (user) => {
-    let ratePercleaner = 10;
-    let ratePerHour = 10;
-    let price = 0;
-    if (user.noOfCleaners) {
-      price += user.noOfCleaners * 10;
-    }
-    if (user.cleaningHours) {
-      price += user.cleaningHours * 10;
-    }
-    if (user.cleaningFrequency) {
-      price += user.cleaningFrequency === "weekly" ? 10 : 20;
-    }
-    if (user.needMaterials) {
-      price += 10;
-    }
-    return {
-      serviceCharges: price,
-      vat: price * 0.1,
-      total: price + price * 0.1,
-    };
-  };
-
-  const { user } = useContext(UserContext);
-  console.log(user);
   return (
-    <div className="border rounded-md shadow-md w-full flex flex-col mt-4 p-8  max-w-[25vw]">
+    <div
+      className={
+        "border rounded-md shadow-md w-full flex flex-col mt-4 p-8  min-w-[25vw] md:sticky md:top-16" +
+        className
+      }
+    >
       <h1 className="text-bold border-b-2 w-full text-xl mb-4 ">Summary</h1>
       <div className="flex flex-col gap-1">
         <div className="flex flex-row justify-between">
@@ -118,3 +123,5 @@ export default function ALLInfoSideBox() {
     </div>
   );
 }
+
+export { calculatePrice };

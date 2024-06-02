@@ -4,11 +4,21 @@ import { Button } from "./ui/button";
 
 export default function ServiceDetails() {
   const { user, setUser } = React.useContext(UserContext);
-  const [activeCleanerButton, setActiveCleanerButton] = useState(0);
-  const [activeHoursButton, setActiveHoursButton] = useState(0);
-  const [activeFrequencyButton, setActiveFrequencyButton] = useState("");
-  const [activeMaterialButton, setActiveMaterialButton] = useState("");
-  const [specialInstruction, setSpecialInstruction] = useState("");
+  const [activeCleanerButton, setActiveCleanerButton] = useState(
+    user?.noOfCleaners
+  );
+  const [activeHoursButton, setActiveHoursButton] = useState(
+    user?.cleaningHours
+  );
+  const [activeFrequencyButton, setActiveFrequencyButton] = useState(
+    user?.cleaningFrequency
+  );
+  const [activeMaterialButton, setActiveMaterialButton] = useState(
+    user?.needMaterials ? "Yes" : "No"
+  );
+  const [specialInstruction, setSpecialInstruction] = useState(
+    user?.instruction || ""
+  );
 
   return (
     <>

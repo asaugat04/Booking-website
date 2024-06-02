@@ -11,6 +11,12 @@ const Stepper = ({ steps }) => {
     }
   };
 
+  const gotoPreviousStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
   const goToNthPreviousStep = (n) => {
     if (currentStep > n) {
       setCurrentStep(n);
@@ -52,14 +58,15 @@ const Stepper = ({ steps }) => {
       <div className="w-full h-32 md:h-4"></div>
       {/* end of div */}
       <div className="flex flex-row justify-center ">
-        <div className="flex w-full min-h-96 md:w-3/5 flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl md:max-w-[45vw]">
+        <div className="flex flex-col m-4 md:border md:p-8 md:rounded-lg md:shadow-xl min-h-96  md:max-w-[45vw] w-full md:w-3/5">
           {steps[currentStep].body}
         </div>
         <div className="detailsBlock hidden md:block ">
-          <ServiceDesc />
+          {/* This helps us to not show description on last page as last page is the comformation page and all the details are shown in the comformation page */}
+          {steps.length > currentStep + 1 && <ServiceDesc />}
         </div>
       </div>
-      <FooterBtns next={goToNextStep} />
+      <FooterBtns prev={gotoPreviousStep} next={goToNextStep} />
     </>
   );
 };

@@ -9,7 +9,7 @@ export default function Payment() {
   const [paymentMethod, setPaymentType] = useState("");
   const [cardNumber, setCardNumber] = useState(null);
   const [name, setName] = useState("");
-  const [expiryDate, setExpiryDate] = useState("12/11");
+  const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState(null);
 
   const { user, setUser } = useContext(UserContext);
@@ -17,7 +17,7 @@ export default function Payment() {
   return (
     <>
       <h1 className="text-lg mb-1 text-left w-full">
-        Where do you need the service?
+        How would you like to pay for your service?
       </h1>
       <p className="text-xs italic">
         You pay only after the service is completed.
