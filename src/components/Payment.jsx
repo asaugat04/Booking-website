@@ -4,18 +4,23 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CardImage from "../assets/card.png";
 import UserContext from "@/UserContext";
 import { Input } from "@/components/ui/input";
+const validatePayment = (user) => {
+  if (user.paymentMethod === undefined) {
+    return false;
+  }
+  return true;
+};
 
 export default function Payment() {
-  const [paymentMethod, setPaymentType] = useState("");
+  const { user, setUser } = useContext(UserContext);
+  const [paymentMethod, setPaymentType] = useState(user.paymentMethod);
   const [cardNumber, setCardNumber] = useState(null);
   const [name, setName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState(null);
 
-  const { user, setUser } = useContext(UserContext);
-
   return (
-    <>
+    <div className="md:p-8 m-4">
       <h1 className="text-lg mb-1 text-left w-full">
         How would you like to pay for your service?
       </h1>
@@ -132,6 +137,8 @@ export default function Payment() {
           </RadioGroup>
         </div>
       </div>
-    </>
+    </div>
   );
 }
+
+export { validatePayment };

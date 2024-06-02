@@ -3,14 +3,20 @@ import { Button } from "./ui/button";
 import DatePicker from "./ui/DatePicker";
 import UserContext from "@/UserContext";
 
+const validateDateTime = (user) => {
+  if (user.date === undefined || user.time === undefined) {
+    return false;
+  }
+  return true;
+};
 export default function DateTime() {
-  const [date, setDate] = useState(new Date());
-  const [selectedtime, setSelectedTime] = useState("");
-
   const { user, setUser } = useContext(UserContext);
 
+  const [date, setDate] = useState(user.date);
+  const [selectedtime, setSelectedTime] = useState(user.time);
+
   return (
-    <>
+    <div className="md:p-8 m-4">
       <h1 className="text-lg mb-1 text-left w-full">
         Pict a date comfortable for you
       </h1>
@@ -45,6 +51,7 @@ export default function DateTime() {
           </Button>
         ))}
       </div>
-    </>
+    </div>
   );
 }
+export { validateDateTime };

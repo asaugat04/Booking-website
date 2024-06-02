@@ -11,6 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+const validateLocation = (user) => {
+  return true;
+};
 export default function Location() {
   const [location, setLocation] = useState(null);
   const [date, setDate] = useState(new Date());
@@ -21,7 +24,7 @@ export default function Location() {
   //the above line can be used to set the location in the user object.
 
   return (
-    <>
+    <div className="md:p-8 m-4">
       <h1 className="text-lg mb-1 text-left w-full">
         Where do you need the service?
       </h1>
@@ -60,6 +63,8 @@ export default function Location() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </>
+    </div>
   );
 }
+
+export { validateLocation };

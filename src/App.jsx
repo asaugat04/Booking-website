@@ -1,10 +1,12 @@
 import "./App.css";
 import Stepper from "./components/Stepper";
 import Navbar from "./components/Navbar";
-import ServiceDetails from "./components/ServiceDetails";
-import Location from "./components/Location";
-import DateTime from "./components/DateTime";
-import Payment from "./components/Payment";
+import ServiceDetails, {
+  validateServiceDetails,
+} from "./components/ServiceDetails";
+import DateTime, { validateDateTime } from "./components/DateTime";
+import Location, { validateLocation } from "./components/Location";
+import Payment, { validatePayment } from "./components/Payment";
 import ReviewConfirm from "./components/ReviewConfirm";
 import UserContext from "./UserContext";
 import { useState } from "react";
@@ -15,17 +17,18 @@ function App() {
     {
       content: "Service Details",
       body: <ServiceDetails />,
+      validate: validateServiceDetails,
     },
-    { content: "DateTime", body: <DateTime /> },
-    { content: "Location", body: <Location /> },
-    { content: "Payment", body: <Payment /> },
+    { content: "DateTime", body: <DateTime />, validate: validateDateTime },
+    { content: "Location", body: <Location />, validate: validateLocation },
+    { content: "Payment", body: <Payment />, validate: validatePayment },
     { content: "Review Confirm", body: <ReviewConfirm /> },
   ];
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Navbar />
 
-      <div className="p-2 ">
+      <div className="p-2 md:p-0 ">
         <Stepper steps={steps} />
       </div>
     </UserContext.Provider>
